@@ -75,28 +75,24 @@ public class MainActivity extends AppCompatActivity {
                       String name = author.getString("name");
                       String email = author.getString("email");
                       String date = author.getString("date");
+
+                      StringBuffer sb = new StringBuffer(date);
+                      Integer hour = Integer.valueOf(sb.substring(11, 13)) + 6;
+                      if (hour > 23) {
+                          int buf = hour;
+                          hour = buf - 24;
+                          sb.replace(11, 13, "0" + hour);
+                      }else{
+                          sb.replace(11, 13, String.valueOf(hour));}
+
                       textView.append("Commit: " + "\n");
                       textView.append("Name: " + name + "\n");
                       textView.append("Email: " + email + "\n");
-                      textView.append("Date: " + date + "\n");
+                      textView.append("Date: " + sb + "\n");
                       textView.append("Message: " + message + "\n\n");
 
                   }
 
-
-
-//                _root = new JSONObject(json);
-//                JSONObject bpi = _root.getJSONObject("bpi");
-//                JSONObject USD = bpi.getJSONObject("USD");
-//                String rate = USD.getString("rate");
-//                String code = USD.getString("code");
-//                JSONObject EUR = bpi.getJSONObject("EUR");
-//                String rate1 = EUR.getString("rate");
-//                String code1 = EUR.getString("code");
-//                textView.setText("");
-//                textView.append("1 BTC = " + rate + " " + code);
-//                textView.append("\n");
-//                textView.append("1 BTC = " + rate1 + " " + code1);
             } catch (Exception e) {
                 textView.setText(R.string.error);
             }
