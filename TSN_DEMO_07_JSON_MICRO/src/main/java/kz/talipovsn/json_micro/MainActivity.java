@@ -66,19 +66,22 @@ public class MainActivity extends AppCompatActivity {
 //            JSONArray array = null;
             try {
                   JSONArray array = new JSONArray(json);
-                  JSONObject array1 = array.getJSONObject(0);
-                  JSONObject commit = array1.getJSONObject("commit");
-                  JSONObject author = commit.getJSONObject("author");
-                  String message = commit.getString("message");
-                  String name = author.getString("name");
-                  String email = author.getString("email");
-                  String date = author.getString("date");
                   textView.setText("");
-                  textView.append("Last commit: " + "\n");
-                  textView.append("Name: " + name + "\n");
-                  textView.append("Email: " + email + "\n");
-                  textView.append("Date: " + date + "\n");
-                  textView.append("Message: " + message + "\n");
+                for (int i = 0; i < array.length(); i ++){
+                      JSONObject array1 = array.getJSONObject(i);
+                      JSONObject commit = array1.getJSONObject("commit");
+                      JSONObject author = commit.getJSONObject("author");
+                      String message = commit.getString("message");
+                      String name = author.getString("name");
+                      String email = author.getString("email");
+                      String date = author.getString("date");
+                      textView.append("Commit: " + "\n");
+                      textView.append("Name: " + name + "\n");
+                      textView.append("Email: " + email + "\n");
+                      textView.append("Date: " + date + "\n");
+                      textView.append("Message: " + message + "\n\n");
+
+                  }
 
 
 
