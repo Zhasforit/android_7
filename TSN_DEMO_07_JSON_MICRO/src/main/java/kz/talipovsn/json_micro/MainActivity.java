@@ -19,6 +19,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.TimeZone;
 
 import javax.net.ssl.SSLContext;
 
@@ -76,19 +80,16 @@ public class MainActivity extends AppCompatActivity {
                       String email = author.getString("email");
                       String date = author.getString("date");
 
-                      StringBuffer sb = new StringBuffer(date);
-                      Integer hour = Integer.valueOf(sb.substring(11, 13)) + 6;
-                      if (hour > 23) {
-                          int buf = hour;
-                          hour = buf - 24;
-                          sb.replace(11, 13, "0" + hour);
-                      }else{
-                          sb.replace(11, 13, String.valueOf(hour));}
+                    DateFormat df_GH = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+                    DateFormat df_KZ = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                    df_GH.setTimeZone(TimeZone.getTimeZone("UTC"));
+//                    df_KZ.setTimeZone(TimeZone.getTimeZone(Calendar.getInstance().getTimeZone().getID()));
+                    String date2 = df_KZ.format(df_GH.parse(date));
 
                       textView.append("Commit: " + "\n");
                       textView.append("Name: " + name + "\n");
                       textView.append("Email: " + email + "\n");
-                      textView.append("Date: " + sb + "\n");
+                      textView.append("Date: " + date2 + "\n");
                       textView.append("Message: " + message + "\n\n");
 
                   }
