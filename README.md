@@ -1,3 +1,3 @@
 # IZT2_Android_07_JSON
 
-![Screenshot](screen.png)
+![Screenshot](screen1.png)
